@@ -28,17 +28,17 @@ public class JobAdvertisementManager implements JobAdvertisementService {
 
     @Override
     public DataResult<List<JobAdvertisement>> getByStatus(boolean status) {
-        return new SuccessDataResult<>(this.jobAdvertisementDao.getByStatus(status), "All active||passive ads have been listed");
+        return new SuccessDataResult<>(this.jobAdvertisementDao.getByStatus(status), "All ads have been listed - status: " + status);
     }
 
     @Override
     public DataResult<List<JobAdvertisement>> getByStatusAndReleaseDate(boolean status, LocalDate releaseDate) {
-        return new SuccessDataResult<>(this.jobAdvertisementDao.getByStatusAndReleaseDate(status, releaseDate), "All active||passive ads have been listed according to their release date");
+        return new SuccessDataResult<>(this.jobAdvertisementDao.getByStatusAndReleaseDate(status, releaseDate), "All ads have been listed according to their release date - status: " + status);
     }
 
     @Override
     public DataResult<List<JobAdvertisement>> getByStatusAndEmployer(boolean status, int employerId) {
-        return new SuccessDataResult<>(this.jobAdvertisementDao.getByStatusAndPosition_Employer_Id(status, employerId), "All active||passive ads of an employer have been listed");
+        return new SuccessDataResult<>(this.jobAdvertisementDao.getByStatusAndPosition_Employer_Id(status, employerId), "All ads of an employer have been listed - status: " + status);
     }
 
     @Override

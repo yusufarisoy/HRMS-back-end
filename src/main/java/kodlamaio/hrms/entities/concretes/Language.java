@@ -3,6 +3,8 @@ package kodlamaio.hrms.entities.concretes;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Range;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -29,6 +31,7 @@ public class Language {
 
     @NotNull
     @NotBlank
+    @Range(min = 1, max = 5)
     @Column(name="level")
     private int level;
 }

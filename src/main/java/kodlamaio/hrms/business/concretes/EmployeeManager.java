@@ -46,6 +46,6 @@ public class EmployeeManager implements EmployeeService
             return new SuccessResult("Employee added - mail verified!");
         }
 
-        return new ErrorResult("Please provide valid data!");
+        return new ErrorResult("Passwords doesn't match!");
     }
 }

@@ -14,6 +14,6 @@ public class StaffVerification implements VerificationService {
 
     @Override
     public boolean verifyUser(Employee employee) {
-        return false;
+        return true;
     }
 }

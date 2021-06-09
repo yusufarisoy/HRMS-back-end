@@ -11,6 +11,7 @@ import java.io.IOException;
 
 public class CloudinaryAdapter implements FileUploadService {
 
+    @Override
     public Result upload(MultipartFile multipartFile) {
         try {
             Cloudinary cloudinary = new Cloudinary();

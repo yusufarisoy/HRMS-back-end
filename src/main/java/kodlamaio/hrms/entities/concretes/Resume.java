@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -23,6 +24,9 @@ public class Resume {
     @ManyToOne()
     @JoinColumn(name = "employee_id")
     private Employee employee;
+
+    @Column(name = "create_date")
+    private Date createDate = new Date();
 
     @Column(name="photo_url")
     private String photoUrl;

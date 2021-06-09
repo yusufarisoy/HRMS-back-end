@@ -10,11 +10,11 @@ public class MernisAdapter implements VerificationService {
     @Override
     public boolean verifyUser(Employee employee) {
         MernisManager mernisManager = new MernisManager();
-        return mernisManager.verifyUser(employee.getNationalityId(), employee.getName(), employee.getSurname(), employee.getDateOfBirth().toLocalDate());
+        return mernisManager.verifyUser(employee.getNationalityId(), employee.getName(), employee.getSurname(), employee.getDateOfBirth());
     }
 
     @Override
     public boolean verifyUser(Employer employer) {
-        return false;
+        return true;
     }
 }
