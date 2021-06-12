@@ -5,19 +5,24 @@ Engin Demiroğ, Java + React bootcamp HRMS project front-end codes.
 
 ## In App Screenshots
 
-![managers](in_app_screenshot/api_managers.png)
+![managers](in_app_screenshots/api_managers.png)
 
-![employer](in_app_screenshot/api_employer_add.png)
+#### Employer registered and informed about confirmations
+![employer](in_app_screenshots/api_employer_add.png)
 
-![system staff](in_app_screenshot/api_system_staff_login.png)
+#### System staff
+![system staff](in_app_screenshots/api_system_staff_login.png)
 
-![system staff confirm](in_app_screenshot/api_system_staff_employer_confirm.png)
+![system staff confirm](in_app_screenshots/api_system_staff_employer_confirm.png)
 
-![positions](in_app_screenshot/api_positions_get_all.png)
+#### Positions
+![positions](in_app_screenshots/api_positions_get_all.png)
 
-![job ads](in_app_screenshot/api_job_ads_get_by_status_and_employer.png)
+##### Job Advertisements
+![job ads](in_app_screenshots/api_job_ads_get_by_status_and_employer.png)
 
 ##### Resumes and Employees
-![resumes](in_app_screenshot/api_resumes_get_by_employee_id.png)
+![resumes](in_app_screenshots/api_resumes_get_by_employee_id.png)
 
-![mail info](in_app_screenshot/server_mail_send.png)
+#### Notification about confirmation mail from server-side
+![mail info](in_app_screenshots/server_mail_send.png)
