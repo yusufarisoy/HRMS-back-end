@@ -16,7 +16,7 @@ import java.util.Date;
 public class Experience {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
+    @Column(name="experience_id")
     private int id;
 
     @ManyToOne()
@@ -25,20 +25,20 @@ public class Experience {
 
     @NotNull
     @NotBlank
-    @Column(name="name")
+    @Column(name="experience_name")
     private String name;
 
     @NotNull
     @NotBlank
-    @Column(name="department")
+    @Column(name="experience_department")
     private String department;
 
     @NotNull
     @NotBlank
-    @Column(name="start_date")
+    @Column(name="experience_start_date")
     private Date startDate;
 
-    @Column(name="finish_date")
+    @Column(name="experience_finish_date")
     private Date finishDate;
 
 }

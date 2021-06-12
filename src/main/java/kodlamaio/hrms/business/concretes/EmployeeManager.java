@@ -1,6 +1,7 @@
 package kodlamaio.hrms.business.concretes;
 
 import kodlamaio.hrms.business.abstracts.EmployeeService;
+import kodlamaio.hrms.core.abstracts.ConfirmationService;
 import kodlamaio.hrms.core.abstracts.VerificationService;
 import kodlamaio.hrms.core.utilities.Utils;
 import kodlamaio.hrms.core.utilities.results.*;
@@ -15,12 +16,14 @@ public class EmployeeManager implements EmployeeService
 {
     private final EmployeeDao employeeDao;
     private final VerificationService[] verificationServices;
+    private final ConfirmationService confirmationService;
 
     @Autowired
-    public EmployeeManager(EmployeeDao employeeDao, VerificationService[] verificationServices) {
+    public EmployeeManager(EmployeeDao employeeDao, VerificationService[] verificationServices, ConfirmationService confirmationService) {
         super();
         this.employeeDao = employeeDao;
         this.verificationServices = verificationServices;
+        this.confirmationService = confirmationService;
     }
 
     @Override
@@ -42,8 +45,10 @@ public class EmployeeManager implements EmployeeService
                 return new ErrorResult("Please provide valid data!");
             }
 
+            this.confirmationService.sendConfirmation(employee.getMail());
+
             this.employeeDao.save(employee);
-            return new SuccessResult("Employee added - mail verified!");
+            return new SuccessResult("Employee registered successfully - confirmation mail send, please confirm your email!");
         }
 
         return new ErrorResult("Passwords doesn't match!");

@@ -17,7 +17,7 @@ import javax.validation.constraints.NotNull;
 public class Language {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
+    @Column(name="language_id")
     private int id;
 
     @ManyToOne()
@@ -26,12 +26,12 @@ public class Language {
 
     @NotNull
     @NotBlank
-    @Column(name="name")
+    @Column(name="language_name")
     private String name;
 
     @NotNull
     @NotBlank
     @Range(min = 1, max = 5)
-    @Column(name="level")
+    @Column(name="language_level")
     private int level;
 }

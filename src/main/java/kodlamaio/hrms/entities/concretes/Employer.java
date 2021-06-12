@@ -17,11 +17,9 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="employers")
-@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler", "employees" })
-public class Employer implements User
-{
+public class Employer implements User {
     @Id
-    @Column(name="id")
+    @Column(name="employer_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
@@ -43,11 +41,16 @@ public class Employer implements User
 
     @NotNull
     @NotBlank
-    @Column(name="password")
+    @Column(name="employer_password")
     private String password;
 
-    @OneToMany(mappedBy = "employer")
-    private List<Employee> employees;
+    @NotNull
+    @NotBlank
+    @Column(name = "confirmation_status")
+    private int confirmationStatus;
+    //0 - waiting for system staff confirmation
+    //1 - confirmed by system staff
+    //-1 - rejected by system staff
 
     @JsonIgnore
     @OneToMany(mappedBy = "employer")

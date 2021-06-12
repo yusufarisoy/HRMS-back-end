@@ -18,7 +18,7 @@ import java.util.List;
 public class Resume {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
+    @Column(name="resume_id")
     private int id;
 
     @ManyToOne()
@@ -37,7 +37,7 @@ public class Resume {
     @Column(name="linkedin_url")
     private String linkedInUrl;
 
-    @Column(name="description")
+    @Column(name="resume_description")
     private String description;
 
     @OneToMany(mappedBy = "resume")

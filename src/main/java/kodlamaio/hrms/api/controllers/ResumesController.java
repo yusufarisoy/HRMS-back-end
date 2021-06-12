@@ -1,10 +1,12 @@
 package kodlamaio.hrms.api.controllers;
 
 import kodlamaio.hrms.business.abstracts.ResumeService;
+import kodlamaio.hrms.core.abstracts.FileUploadService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.ErrorDataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.concretes.Resume;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -16,38 +18,40 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@CrossOrigin
 @RestController
-@RequestMapping(value = "/api/resumes")
+@RequestMapping("/api/resumes")
 public class ResumesController {
 
     private final ResumeService resumeService;
 
+    @Autowired
     public ResumesController(ResumeService resumeService) {
         this.resumeService = resumeService;
     }
 
-    @PostMapping(value = "/add")
+    @PostMapping("/add")
     public ResponseEntity<?> add(@Valid @RequestBody Resume resume) {
         return ResponseEntity.ok(this.resumeService.add(resume));
     }
 
-    @PostMapping(value = "/upload-image")
+    @PostMapping("/upload-image")
     public Result uploadImage(@RequestParam int resumeId, @Valid @RequestParam("image") MultipartFile multipartFile) {
         return this.resumeService.upload(resumeId, multipartFile);
     }
 
-    @GetMapping(value = "/get-all-sorted-by-graduation-date")
+    @GetMapping("/get-all-sorted-by-graduation-date")
     public DataResult<List<Resume>> getAllSortedByGraduationDate() {
         return this.resumeService.getAllSortedByGraduationDate();
     }
 
-    @GetMapping(value = "/get-all-sorted-by-experience-year")
+    @GetMapping("/get-all-sorted-by-experience-year")
     public DataResult<List<Resume>> getAllSortedByExperienceYear() {
         return this.resumeService.getAllSortedByExperienceYear();
     }
 
     //All Resumes of Employee
-    @GetMapping(value = "/get-by-employee-id")
+    @GetMapping("/get-by-employee-id")
     public DataResult<List<Resume>> getByEmployee_Id(@RequestParam int employeeId) {
         return this.resumeService.getByEmployee_Id(employeeId);
     }

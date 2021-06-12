@@ -14,23 +14,23 @@ import java.util.Date;
 public class JobAdvertisement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "job_advertisement_id")
     private int id;
 
     @ManyToOne()
     @JoinColumn(name = "position_id")
     private Position position;
 
-    @Column(name = "status")//Active or Passive
+    @Column(name = "job_advertisement_status")//Active or Passive
     private boolean status;
 
     @Column(name = "release_date")
     private Date releaseDate;
 
-    @Column(name = "description")
+    @Column(name = "job_advertisement_description")
     private String description;
 
-    @Column(name = "city")
+    @Column(name = "job_advertisement_city")
     private String city;
 
     @Column(name = "minimum_salary")

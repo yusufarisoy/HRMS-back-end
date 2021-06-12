@@ -1,8 +1,7 @@
 package kodlamaio.hrms.business.concretes;
 
 import kodlamaio.hrms.business.abstracts.EmployerService;
-import kodlamaio.hrms.core.abstracts.VerificationService;
-import kodlamaio.hrms.core.utilities.Utils;
+import kodlamaio.hrms.core.abstracts.ConfirmationService;
 import kodlamaio.hrms.core.utilities.results.*;
 import kodlamaio.hrms.dataAccess.abstracts.EmployerDao;
 import kodlamaio.hrms.entities.concretes.Employer;
@@ -14,13 +13,13 @@ import java.util.List;
 public class EmployerManager implements EmployerService
 {
     private final EmployerDao employerDao;
-    private final VerificationService[] verificationServices;
+    private final ConfirmationService confirmationService;
 
     @Autowired
-    public EmployerManager(EmployerDao employerDao, VerificationService[] verificationServices) {
+    public EmployerManager(EmployerDao employerDao, ConfirmationService confirmationService) {
         super();
         this.employerDao = employerDao;
-        this.verificationServices = verificationServices;
+        this.confirmationService = confirmationService;
     }
 
     @Override
@@ -38,12 +37,10 @@ public class EmployerManager implements EmployerService
                 }
             }
 
-            if(!Utils.runVerificationServices(verificationServices, employer)) {
-                return new ErrorResult("Please provide valid data!");
-            }
+            this.confirmationService.sendConfirmation(employer.getMail());
 
             this.employerDao.save(employer);
-            return new SuccessResult("Employer added - mail verified");
+            return new SuccessResult("Employer registered successfully - confirmation mail send, please confirm your email and wait for system staff to confirm your information!");
         }
 
         return new ErrorResult("Please provide valid data!");

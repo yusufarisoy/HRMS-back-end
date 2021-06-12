@@ -16,7 +16,7 @@ import java.util.Date;
 public class Education {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
+    @Column(name="education_id")
     private int id;
 
     @ManyToOne()
@@ -25,19 +25,19 @@ public class Education {
 
     @NotNull
     @NotBlank
-    @Column(name="name")
+    @Column(name="education_name")
     private String name;
 
     @NotNull
     @NotBlank
-    @Column(name="department")
+    @Column(name="education_department")
     private String department;
 
     @NotNull
     @NotBlank
-    @Column(name="start_date")
+    @Column(name="education_start_date")
     private Date startDate;
 
-    @Column(name="finish_date")
+    @Column(name="education_finish_date")
     private Date finishDate;
 }

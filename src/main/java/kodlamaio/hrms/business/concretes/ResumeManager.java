@@ -36,6 +36,7 @@ public class ResumeManager implements ResumeService {
             Resume res = this.resumeDao.findById(resumeId).get();
             res.setPhotoUrl(multipartFile.getName());
 
+            //return new ErrorResult("Incorrect Resume Id");
             return this.fileUploadService.upload(multipartFile);
         }
 
