@@ -26,7 +26,7 @@ public class Resume {
     private Employee employee;
 
     @Column(name = "create_date")
-    private Date createDate = new Date();
+    private Date createDate;
 
     @Column(name="photo_url")
     private String photoUrl;

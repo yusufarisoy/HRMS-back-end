@@ -1,9 +1,7 @@
 package kodlamaio.hrms.core.utilities;
 
-import kodlamaio.hrms.core.abstracts.ConfirmationService;
 import kodlamaio.hrms.core.abstracts.VerificationService;
 import kodlamaio.hrms.entities.concretes.Employee;
-import kodlamaio.hrms.entities.concretes.Employer;
 
 public class Utils {
 

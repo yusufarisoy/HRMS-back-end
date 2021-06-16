@@ -4,6 +4,7 @@ import kodlamaio.hrms.business.abstracts.PositionService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.concretes.Position;
+import kodlamaio.hrms.entities.dtos.PositionDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -25,8 +26,13 @@ public class PositionsController
         return this.positionService.getAll();
     }
 
+    @GetMapping("/get-by-employer-id")
+    public DataResult<List<Position>> getByEmployer_Id(@RequestParam int employerId) {
+        return this.positionService.getByEmployer_Id(employerId);
+    }
+
     @PostMapping("/add")
-    public Result add(@RequestBody Position position) {
-        return this.positionService.add(position);
+    public Result add(@RequestBody PositionDto positionDto) {
+        return this.positionService.add(positionDto);
     }
 }

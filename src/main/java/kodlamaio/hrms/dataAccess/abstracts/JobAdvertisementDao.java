@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface JobAdvertisementDao extends JpaRepository<JobAdvertisement, Integer> {
-    List<JobAdvertisement> getByStatus(boolean status);
+    List<JobAdvertisement> getByStatusAndApprovalStatus(boolean status, boolean approvalStatus);
 
     List<JobAdvertisement> getByStatusAndReleaseDate(boolean status, LocalDate releaseDate);
 

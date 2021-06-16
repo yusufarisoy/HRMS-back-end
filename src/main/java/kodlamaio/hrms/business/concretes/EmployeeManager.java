@@ -7,6 +7,7 @@ import kodlamaio.hrms.core.utilities.Utils;
 import kodlamaio.hrms.core.utilities.results.*;
 import kodlamaio.hrms.dataAccess.abstracts.EmployeeDao;
 import kodlamaio.hrms.entities.concretes.Employee;
+import kodlamaio.hrms.entities.dtos.EmployeeDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -32,22 +33,30 @@ public class EmployeeManager implements EmployeeService
     }
 
     @Override
-    public Result add(Employee employee, String passwordRepeat) {
-        if(employee.getPassword().equals(passwordRepeat)) {
+    public Result add(EmployeeDto employeeDto) {
+        if(employeeDto.getPassword().equals(employeeDto.getPasswordRepeat())) {
             List<Employee> list = this.employeeDao.findAll();
             for(Employee emp : list) {
-                if(emp.getMail().equals(employee.getMail()) || emp.getNationalityId().equals(employee.getNationalityId())) {
+                if(emp.getMail().equals(employeeDto.getMail()) || emp.getNationalityId().equals(employeeDto.getNationalityId())) {
                     return new ErrorResult("Account already exists!");
                 }
             }
+
+            Employee employee = new Employee();
+            employee.setNationalityId(employeeDto.getNationalityId());
+            employee.setMail(employeeDto.getMail());
+            employee.setPassword(employeeDto.getPassword());
+            employee.setName(employeeDto.getName());
+            employee.setSurname(employeeDto.getSurname());
+            employee.setDateOfBirth(employeeDto.getDateOfBirth());
 
             if(!Utils.runVerificationServices(verificationServices, employee)) {
                 return new ErrorResult("Please provide valid data!");
             }
 
-            this.confirmationService.sendConfirmation(employee.getMail());
-
             this.employeeDao.save(employee);
+
+            this.confirmationService.sendConfirmation(employee.getMail());
             return new SuccessResult("Employee registered successfully - confirmation mail send, please confirm your email!");
         }
 

@@ -4,6 +4,7 @@ import kodlamaio.hrms.business.abstracts.EmployerService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.concretes.Employer;
+import kodlamaio.hrms.entities.dtos.EmployerDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -26,7 +27,7 @@ public class EmployersController
     }
 
     @PostMapping("/add")
-    public Result add(@RequestBody Employer employer, @RequestParam String passwordRepeat) {
-        return this.employerService.add(employer, passwordRepeat);
+    public Result add(@RequestBody EmployerDto employerDto) {
+        return this.employerService.add(employerDto);
     }
 }

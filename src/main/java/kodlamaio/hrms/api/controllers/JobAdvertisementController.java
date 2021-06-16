@@ -3,6 +3,7 @@ package kodlamaio.hrms.api.controllers;
 import kodlamaio.hrms.business.abstracts.JobAdvertisementService;
 import kodlamaio.hrms.core.utilities.results.*;
 import kodlamaio.hrms.entities.concretes.JobAdvertisement;
+import kodlamaio.hrms.entities.dtos.JobAdvertisementDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
@@ -22,13 +23,13 @@ public class JobAdvertisementController {
     }
 
     @PostMapping("/add")
-    public Result add(@RequestBody JobAdvertisement jobAdvertisement) {
-        return this.jobAdvertisementService.add(jobAdvertisement);
+    public Result add(@RequestBody JobAdvertisementDto jobAdvertisementDto) {
+        return this.jobAdvertisementService.add(jobAdvertisementDto);
     }
 
     @GetMapping("/get-by-status")
-    public DataResult<List<JobAdvertisement>> getByStatus(@RequestParam boolean status) {
-        return this.jobAdvertisementService.getByStatus(status);
+    public DataResult<List<JobAdvertisement>> getByStatus(@RequestParam boolean status, @RequestParam boolean approvalStatus) {
+        return this.jobAdvertisementService.getByStatusAndApprovalStatus(status, approvalStatus);
     }
 
     @GetMapping("/get-by-status-and-releaseDate")

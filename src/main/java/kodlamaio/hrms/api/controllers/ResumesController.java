@@ -6,6 +6,7 @@ import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.ErrorDataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.concretes.Resume;
+import kodlamaio.hrms.entities.dtos.ResumeDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,8 +32,8 @@ public class ResumesController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> add(@Valid @RequestBody Resume resume) {
-        return ResponseEntity.ok(this.resumeService.add(resume));
+    public ResponseEntity<?> add(@Valid @RequestBody ResumeDto resumeDto) {
+        return ResponseEntity.ok(this.resumeService.add(resumeDto));
     }
 
     @PostMapping("/upload-image")

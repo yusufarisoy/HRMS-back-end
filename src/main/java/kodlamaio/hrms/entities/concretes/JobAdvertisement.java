@@ -1,5 +1,6 @@
 package kodlamaio.hrms.entities.concretes;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,8 +22,11 @@ public class JobAdvertisement {
     @JoinColumn(name = "position_id")
     private Position position;
 
-    @Column(name = "job_advertisement_status")//Active or Passive
-    private boolean status;
+    @Column(name = "approval_status")
+    private boolean approvalStatus;//Approved or Rejected
+
+    @Column(name = "job_advertisement_status")
+    private boolean status;//Active or Passive
 
     @Column(name = "release_date")
     private Date releaseDate;
@@ -41,6 +45,13 @@ public class JobAdvertisement {
 
     @Column(name = "position_count")
     private int positionCount;
+
+    @Column(name = "work_style")
+    private String workStyle;//Remote or not
+
+    @JsonIgnore
+    @OneToOne(mappedBy = "jobAdvertisement")
+    private JobTime jobTime;
 
     @Column(name = "last_apply_date")
     private Date lastApplyDate;
