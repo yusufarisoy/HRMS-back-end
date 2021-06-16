@@ -1,11 +1,15 @@
 # HRMS-back-end
 Engin Demiroğ, Java + React bootcamp HRMS project front-end codes.
 
-[Spring Boot](https://spring.io/projects/spring-boot)
+[React JS Front-end Project](https://github.com/yusufarisoy/HRMS-front-end)
 
 ## In App Screenshots
-
 ![managers](in_app_screenshots/api_managers.png)
+
+#### Job-ad created and System Staff approved
+![managers](in_app_screenshots/ad_create_approval_false.png)
+
+![managers](in_app_screenshots/api_response_approve_job_ad.png)
 
 #### Employer registered and informed about confirmations
 ![employer](in_app_screenshots/api_employer_add.png)
@@ -26,3 +30,6 @@ Engin Demiroğ, Java + React bootcamp HRMS project front-end codes.
 
 #### Notification about confirmation mail from server-side
 ![mail info](in_app_screenshots/server_mail_send.png)
+
+#### Technologies
+[Spring Boot](https://spring.io/projects/spring-boot)
