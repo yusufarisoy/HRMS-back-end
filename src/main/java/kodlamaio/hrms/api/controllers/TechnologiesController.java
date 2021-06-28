@@ -2,7 +2,7 @@ package kodlamaio.hrms.api.controllers;
 
 import kodlamaio.hrms.business.abstracts.TechnologyService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
-import kodlamaio.hrms.entities.concretes.Technology;
+import kodlamaio.hrms.entities.dtos.TechnologyEditDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +23,7 @@ public class TechnologiesController {
     }
 
     @GetMapping("/get-by-resume-id")
-    public DataResult<List<Technology>> getByResume_Id(int resumeId) {
+    public DataResult<List<TechnologyEditDto>> getByResume_Id(int resumeId) {
         return this.technologyService.getByResume_Id(resumeId);
     }
 }

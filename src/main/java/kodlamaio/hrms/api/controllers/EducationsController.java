@@ -2,7 +2,7 @@ package kodlamaio.hrms.api.controllers;
 
 import kodlamaio.hrms.business.abstracts.EducationService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
-import kodlamaio.hrms.entities.concretes.Education;
+import kodlamaio.hrms.entities.dtos.EducationEditDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +23,7 @@ public class EducationsController {
     }
 
     @GetMapping("/get-by-resume-id")
-    public DataResult<List<Education>> getByResume_Id(int resumeId) {
+    public DataResult<List<EducationEditDto>> getByResume_Id(int resumeId) {
         return this.educationService.getByResume_Id(resumeId);
     }
 }

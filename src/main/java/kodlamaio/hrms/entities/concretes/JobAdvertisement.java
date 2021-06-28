@@ -23,7 +23,12 @@ public class JobAdvertisement {
     private Position position;
 
     @Column(name = "approval_status")
-    private boolean approvalStatus;//Approved or Rejected
+    private int approvalStatus;
+    /*
+    * 0 - waiting for approval
+    * 1 - approved
+    * -1 - rejected
+    * */
 
     @Column(name = "job_advertisement_status")
     private boolean status;//Active or Passive

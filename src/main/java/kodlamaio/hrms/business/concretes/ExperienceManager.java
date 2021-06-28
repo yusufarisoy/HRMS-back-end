@@ -5,8 +5,10 @@ import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.dataAccess.abstracts.ExperienceDao;
 import kodlamaio.hrms.entities.concretes.Experience;
+import kodlamaio.hrms.entities.dtos.ExperienceEditDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,7 +22,18 @@ public class ExperienceManager implements ExperienceService {
     }
 
     @Override
-    public DataResult<List<Experience>> getByResume_Id(int resumeId) {
-        return new SuccessDataResult<>(this.experienceDao.getByResume_Id(resumeId), "Experiences of resume listed");
+    public DataResult<List<ExperienceEditDto>> getByResume_Id(int resumeId) {
+        List<ExperienceEditDto> experienceEditDtoList = new ArrayList<>();
+        for(Experience experience : this.experienceDao.getByResume_Id(resumeId)) {
+            ExperienceEditDto experienceEditDto = new ExperienceEditDto();
+            experienceEditDto.setId(experience.getId());
+            experienceEditDto.setName(experience.getName());
+            experienceEditDto.setDepartment(experience.getDepartment());
+            experienceEditDto.setStartDate(experience.getStartDate());
+            experienceEditDto.setFinishDate(experience.getFinishDate());
+            experienceEditDtoList.add(experienceEditDto);
+        }
+
+        return new SuccessDataResult<>(experienceEditDtoList, "Experiences of resume listed");
     }
 }

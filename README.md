@@ -3,10 +3,19 @@ Engin Demiroğ, Java + React bootcamp HRMS project front-end codes.
 
 [React JS Front-end Project](https://github.com/yusufarisoy/HRMS-front-end)
 
-## In App Screenshots
+## Managers
 ![managers](in_app_screenshots/api_managers.png)
 
-#### Job-ad created and System Staff approved
+## Employer Information Update
+![managers](in_app_screenshots/db_employer_information_update.png)
+
+#### Confirmed by system staff
+![managers](in_app_screenshots/api_response_confirm_employer_information_update.png)
+
+## Employees Favorite Job Advertisements
+![managers](in_app_screenshots/db_employees_favorites.png)
+
+## Job-ad created and System Staff approved
 ![managers](in_app_screenshots/ad_create_approval_false.png)
 
 ![managers](in_app_screenshots/api_response_approve_job_ad.png)
@@ -14,7 +23,7 @@ Engin Demiroğ, Java + React bootcamp HRMS project front-end codes.
 #### Employer registered and informed about confirmations
 ![employer](in_app_screenshots/api_employer_add.png)
 
-#### System staff
+## System staff
 ![system staff](in_app_screenshots/api_system_staff_login.png)
 
 ![system staff confirm](in_app_screenshots/api_system_staff_employer_confirm.png)
@@ -22,10 +31,10 @@ Engin Demiroğ, Java + React bootcamp HRMS project front-end codes.
 #### Positions
 ![positions](in_app_screenshots/api_positions_get_all.png)
 
-##### Job Advertisements
+### Job Advertisements
 ![job ads](in_app_screenshots/api_job_ads_get_by_status_and_employer.png)
 
-##### Resumes and Employees
+### Resumes and Employees
 ![resumes](in_app_screenshots/api_resumes_get_by_employee_id.png)
 
 #### Notification about confirmation mail from server-side

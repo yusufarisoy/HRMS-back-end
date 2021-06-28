@@ -4,10 +4,7 @@ import kodlamaio.hrms.business.abstracts.SystemStaffService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.concretes.SystemStaff;
-import kodlamaio.hrms.entities.dtos.SystemStaffConfirmationEmployerDto;
-import kodlamaio.hrms.entities.dtos.SystemStaffConfirmationJobAdvertisementDto;
-import kodlamaio.hrms.entities.dtos.SystemStaffDto;
-import kodlamaio.hrms.entities.dtos.SystemStaffLoginDto;
+import kodlamaio.hrms.entities.dtos.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,17 +26,27 @@ public class SystemStaffController {
     }
 
     @PostMapping("/login")
-    DataResult<SystemStaff> logInWithEmailAndPassword(@RequestBody SystemStaffLoginDto loginParams) {
+    public DataResult<SystemStaff> logInWithEmailAndPassword(@RequestBody SystemStaffLoginDto loginParams) {
         return this.staffService.logInWithEmailAndPassword(loginParams);
     }
 
     @PostMapping("/confirm/employer")
-    Result confirmEmployerRegister(@RequestBody SystemStaffConfirmationEmployerDto confirmParams) {
+    public Result confirmEmployerRegister(@RequestBody SystemStaffConfirmationEmployerDto confirmParams) {
         return this.staffService.confirmEmployerRegister(confirmParams);
     }
 
     @PostMapping("/confirm/job-advertisement")
-    Result approveJobAdvertisement(@RequestBody SystemStaffConfirmationJobAdvertisementDto confirmParams) {
+    public Result approveJobAdvertisement(@RequestBody SystemStaffConfirmationJobAdvertisementDto confirmParams) {
         return this.staffService.approveJobAdvertisement(confirmParams);
+    }
+
+    @PostMapping("/confirm/employer/information-update")
+    public Result confirmEmployerInformationUpdate(@RequestBody SystemStaffConfirmationEmployerInformationUpdateDto confirmationParams) {
+        return this.staffService.confirmEmployerInformationUpdate(confirmationParams);
+    }
+
+    @PostMapping("/profile/edit")
+    public Result updateInformation(@RequestBody SystemStaffInformationUpdateDto informationUpdateDto) {
+        return this.staffService.updateInformation(informationUpdateDto);
     }
 }

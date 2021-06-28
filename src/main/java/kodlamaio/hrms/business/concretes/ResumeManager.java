@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.util.Date;
 import java.util.List;
 
@@ -98,6 +97,89 @@ public class ResumeManager implements ResumeService {
     }
 
     @Override
+    public Result edit(ResumeEditDto resumeEditDto) {
+        if(this.resumeDao.findById(resumeEditDto.getId()).isPresent()) {
+            Resume resume = this.resumeDao.findById(resumeEditDto.getId()).get();
+            if(!resumeEditDto.getPhotoUrl().equals("")) {
+                resume.setPhotoUrl(resumeEditDto.getPhotoUrl());
+            } if(!resumeEditDto.getGithubUrl().equals("")) {
+                resume.setGithubUrl(resumeEditDto.getGithubUrl());
+            } if(!resumeEditDto.getLinkedInUrl().equals("")) {
+                resume.setLinkedInUrl(resumeEditDto.getLinkedInUrl());
+            } if(!resumeEditDto.getDescription().equals("")) {
+                resume.setDescription(resumeEditDto.getDescription());
+            }
+
+            for(EducationEditDto educationEditDto : resumeEditDto.getEducationEditDtoList()) {
+                Education education;
+                if(this.educationDao.findById(educationEditDto.getId()).isPresent()) {
+                    education = this.educationDao.findById(educationEditDto.getId()).get();
+                } else {
+                    education = new Education();
+                    education.setResume(resume);
+                }
+                education.setName(educationEditDto.getName());
+                education.setDepartment(educationEditDto.getDepartment());
+                education.setStartDate(educationEditDto.getStartDate());
+                education.setFinishDate(educationEditDto.getFinishDate());
+                this.educationDao.save(education);
+            }
+            for(ExperienceEditDto experienceEditDto : resumeEditDto.getExperienceEditDtoList()) {
+                Experience experience;
+                if(this.experienceDao.findById(experienceEditDto.getId()).isPresent()) {
+                    experience = this.experienceDao.findById(experienceEditDto.getId()).get();
+                } else {
+                    experience = new Experience();
+                    experience.setResume(resume);
+                }
+                experience.setName(experienceEditDto.getName());
+                experience.setDepartment(experienceEditDto.getDepartment());
+                experience.setStartDate(experienceEditDto.getStartDate());
+                experience.setFinishDate(experienceEditDto.getFinishDate());
+                this.experienceDao.save(experience);
+            }
+            for(LanguageEditDto languageEditDto : resumeEditDto.getLanguageEditDtoList()) {
+                Language language;
+                if(this.languageDao.findById(languageEditDto.getId()).isPresent()) {
+                    language = this.languageDao.findById(languageEditDto.getId()).get();
+                } else {
+                    language = new Language();
+                    language.setResume(resume);
+                }
+                language.setName(languageEditDto.getName());
+                language.setLevel(languageEditDto.getLevel());
+                this.languageDao.save(language);
+            }
+            for(TechnologyEditDto technologyEditDto : resumeEditDto.getTechnologyEditDtoList()) {
+                Technology technology;
+                if(this.technologyDao.findById(technologyEditDto.getId()).isPresent()) {
+                    technology = this.technologyDao.findById(technologyEditDto.getId()).get();
+                } else {
+                    technology = new Technology();
+                    technology.setResume(resume);
+                }
+                technology.setName(technologyEditDto.getName());
+                this.technologyDao.save(technology);
+            }
+
+            for(int id : resumeEditDto.getEducationDeleteList()) {
+                this.educationDao.deleteById(id);
+            } for(int id : resumeEditDto.getExperienceDeleteList()) {
+                this.experienceDao.deleteById(id);
+            } for(int id : resumeEditDto.getLanguageDeleteList()) {
+                this.languageDao.deleteById(id);
+            } for(int id : resumeEditDto.getTechnologyDeleteList()) {
+                this.technologyDao.deleteById(id);
+            }
+
+            this.resumeDao.save(resume);
+            return new SuccessResult("Resume updated");
+        }
+
+        return new ErrorResult("Resume doesn't exist");
+    }
+
+    @Override
     public Result upload(int resumeId, MultipartFile multipartFile) {
         if(this.resumeDao.findById(resumeId).isPresent()) {
             Resume res = this.resumeDao.findById(resumeId).get();
@@ -107,6 +189,15 @@ public class ResumeManager implements ResumeService {
         }
 
         return new ErrorResult("Incorrect Resume Id");
+    }
+
+    @Override
+    public DataResult<Resume> getById(int id) {
+        if(this.resumeDao.findById(id).isPresent()) {
+            return new SuccessDataResult<>(this.resumeDao.findById(id).get(), "Resume with id returned");
+        }
+
+        return new ErrorDataResult<>("Resume doesn't exist");
     }
 
     @Override

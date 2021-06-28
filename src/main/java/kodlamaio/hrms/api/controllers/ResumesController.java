@@ -7,6 +7,7 @@ import kodlamaio.hrms.core.utilities.results.ErrorDataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.concretes.Resume;
 import kodlamaio.hrms.entities.dtos.ResumeDto;
+import kodlamaio.hrms.entities.dtos.ResumeEditDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,9 +37,19 @@ public class ResumesController {
         return ResponseEntity.ok(this.resumeService.add(resumeDto));
     }
 
+    @PostMapping("/edit")
+    public Result edit(@RequestBody ResumeEditDto resumeEditDto) {
+        return this.resumeService.edit(resumeEditDto);
+    }
+
     @PostMapping("/upload-image")
     public Result uploadImage(@RequestParam int resumeId, @Valid @RequestParam("image") MultipartFile multipartFile) {
         return this.resumeService.upload(resumeId, multipartFile);
+    }
+
+    @GetMapping("/get-by-id")
+    public DataResult<Resume> getById(int id) {
+        return this.resumeService.getById(id);
     }
 
     @GetMapping("/get-all-sorted-by-graduation-date")

@@ -4,7 +4,6 @@ import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.concretes.Employer;
 import kodlamaio.hrms.entities.dtos.EmployerDto;
-
 import java.util.List;
 
 public interface EmployerService {

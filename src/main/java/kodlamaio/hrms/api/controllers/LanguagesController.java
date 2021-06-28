@@ -2,7 +2,7 @@ package kodlamaio.hrms.api.controllers;
 
 import kodlamaio.hrms.business.abstracts.LanguageService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
-import kodlamaio.hrms.entities.concretes.Language;
+import kodlamaio.hrms.entities.dtos.LanguageEditDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +23,7 @@ public class LanguagesController {
     }
 
     @GetMapping("/get-by-resume-id")
-    public DataResult<List<Language>> getByResume_Id(int resumeId) {
+    public DataResult<List<LanguageEditDto>> getByResume_Id(int resumeId) {
         return this.languageService.getByResume_Id(resumeId);
     }
 }

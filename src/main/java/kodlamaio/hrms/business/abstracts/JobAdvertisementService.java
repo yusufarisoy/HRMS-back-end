@@ -11,11 +11,15 @@ import java.util.List;
 public interface JobAdvertisementService {
     Result add(JobAdvertisementDto jobAdvertisementDto);
 
-    DataResult<List<JobAdvertisement>> getByStatusAndApprovalStatus(boolean status, boolean approvalStatus);
+    DataResult<List<JobAdvertisement>> getByStatusAndApprovalStatus(boolean status, int approvalStatus, int page, int pageSize);
 
     DataResult<List<JobAdvertisement>> getByStatusAndReleaseDate(boolean status, LocalDate releaseDate);
 
     DataResult<List<JobAdvertisement>> getByStatusAndEmployer(boolean status, int employerId);
 
     Result closeJobAdvertisement(int jobAdvertisementId);
+
+    DataResult<List<JobAdvertisement>> getByStatusAndCityAndJobTime_Name(boolean status, String city, String jobTimeName);
+    DataResult<List<JobAdvertisement>> getByStatusAndCity(boolean status, String city);
+    DataResult<List<JobAdvertisement>> getByStatusAndJobTime_Name(boolean status, String jobTimeName);
 }

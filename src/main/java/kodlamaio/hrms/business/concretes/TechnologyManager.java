@@ -5,8 +5,10 @@ import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.dataAccess.abstracts.TechnologyDao;
 import kodlamaio.hrms.entities.concretes.Technology;
+import kodlamaio.hrms.entities.dtos.TechnologyEditDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,7 +22,14 @@ public class TechnologyManager implements TechnologyService {
     }
 
     @Override
-    public DataResult<List<Technology>> getByResume_Id(int resumeId) {
-        return new SuccessDataResult<>(this.technologyDao.getByResume_Id(resumeId), "");
+    public DataResult<List<TechnologyEditDto>> getByResume_Id(int resumeId) {
+        List<TechnologyEditDto> technologyEditDtoList = new ArrayList<>();
+        for(Technology technology : this.technologyDao.getByResume_Id(resumeId)) {
+            TechnologyEditDto technologyEditDto = new TechnologyEditDto();
+            technologyEditDto.setId(technology.getId());
+            technologyEditDto.setName(technology.getName());
+            technologyEditDtoList.add(technologyEditDto);
+        }
+        return new SuccessDataResult<>(technologyEditDtoList, "Technologies of resume listed");
     }
 }

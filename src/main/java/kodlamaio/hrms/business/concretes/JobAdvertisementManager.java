@@ -10,6 +10,8 @@ import kodlamaio.hrms.entities.concretes.JobTime;
 import kodlamaio.hrms.entities.concretes.Position;
 import kodlamaio.hrms.entities.dtos.JobAdvertisementDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.Date;
@@ -38,7 +40,7 @@ public class JobAdvertisementManager implements JobAdvertisementService {
             Position position = this.positionDao.findById(jobAdvertisementDto.getPositionId()).get();
             jobAdvertisement.setPosition(position);
 
-            jobAdvertisement.setApprovalStatus(false);
+            jobAdvertisement.setApprovalStatus(0);
             jobAdvertisement.setStatus(true);
             jobAdvertisement.setReleaseDate(new Date());
             jobAdvertisement.setDescription(jobAdvertisementDto.getDescription());
@@ -62,8 +64,9 @@ public class JobAdvertisementManager implements JobAdvertisementService {
     }
 
     @Override
-    public DataResult<List<JobAdvertisement>> getByStatusAndApprovalStatus(boolean status, boolean approvalStatus) {
-        return new SuccessDataResult<>(this.jobAdvertisementDao.getByStatusAndApprovalStatus(status, approvalStatus),
+    public DataResult<List<JobAdvertisement>> getByStatusAndApprovalStatus(boolean status, int approvalStatus, int page, int pageSize) {
+        Pageable pageable = PageRequest.of(page - 1, pageSize);
+        return new SuccessDataResult<>(this.jobAdvertisementDao.getByStatusAndApprovalStatus(status, approvalStatus, pageable),
                 "All ads have been listed - status: " + status + " - approvalStatus: " + approvalStatus);
     }
 
@@ -88,5 +91,20 @@ public class JobAdvertisementManager implements JobAdvertisementService {
         }
 
         return new ErrorResult("Job advertisement couldn't found");
+    }
+
+    @Override
+    public DataResult<List<JobAdvertisement>> getByStatusAndCityAndJobTime_Name(boolean status, String city, String jobTimeName) {
+        return new SuccessDataResult<>(this.jobAdvertisementDao.getByStatusAndApprovalStatusAndCityAndJobTime_Name(status, 1, city, jobTimeName));
+    }
+
+    @Override
+    public DataResult<List<JobAdvertisement>> getByStatusAndCity(boolean status, String city) {
+        return new SuccessDataResult<>(this.jobAdvertisementDao.getByStatusAndApprovalStatusAndCity(status, 1, city));
+    }
+
+    @Override
+    public DataResult<List<JobAdvertisement>> getByStatusAndJobTime_Name(boolean status, String jobTimeName) {
+        return new SuccessDataResult<>(this.jobAdvertisementDao.getByStatusAndApprovalStatusAndJobTime_Name(status, 1, jobTimeName));
     }
 }

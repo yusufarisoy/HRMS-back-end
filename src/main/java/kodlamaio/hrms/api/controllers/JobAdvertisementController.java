@@ -28,8 +28,8 @@ public class JobAdvertisementController {
     }
 
     @GetMapping("/get-by-status")
-    public DataResult<List<JobAdvertisement>> getByStatus(@RequestParam boolean status, @RequestParam boolean approvalStatus) {
-        return this.jobAdvertisementService.getByStatusAndApprovalStatus(status, approvalStatus);
+    public DataResult<List<JobAdvertisement>> getByStatus(@RequestParam boolean status, @RequestParam int approvalStatus, @RequestParam int page, @RequestParam int pageSize) {
+        return this.jobAdvertisementService.getByStatusAndApprovalStatus(status, approvalStatus, page, pageSize);
     }
 
     @GetMapping("/get-by-status-and-releaseDate")
@@ -45,5 +45,18 @@ public class JobAdvertisementController {
     @GetMapping("/close-job-advertisement")
     public Result closeJobAdvertisement(@RequestParam int jobAdvertisementId) {
         return this.jobAdvertisementService.closeJobAdvertisement(jobAdvertisementId);
+    }
+
+    @GetMapping("/get-by-status-and-city-and-job-time-name")
+    public DataResult<List<JobAdvertisement>> getByStatusAndCityAndJobTime_Name(@RequestParam boolean status, @RequestParam String city, @RequestParam String jobTimeName) {
+        return this.jobAdvertisementService.getByStatusAndCityAndJobTime_Name(status, city, jobTimeName);
+    }
+    @GetMapping("/get-by-status-and-city")
+    public DataResult<List<JobAdvertisement>> getByStatusAndCity(@RequestParam boolean status, @RequestParam String city) {
+        return this.jobAdvertisementService.getByStatusAndCity(status, city);
+    }
+    @GetMapping("/get-by-status-and-job-time-name")
+    public DataResult<List<JobAdvertisement>> getByStatusAndJobTime_Name(@RequestParam boolean status, @RequestParam String jobTimeName) {
+        return this.jobAdvertisementService.getByStatusAndJobTime_Name(status, jobTimeName);
     }
 }
